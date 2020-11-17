@@ -1,2 +1,3 @@
 (library
- (name expenses))
+  (name expenses)
+  (libraries core expense_types))
