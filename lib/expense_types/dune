@@ -1,0 +1,4 @@
+(library
+  (name expense_types)
+  (preprocess (pps ppx_sexp_conv))
+  (libraries core))
