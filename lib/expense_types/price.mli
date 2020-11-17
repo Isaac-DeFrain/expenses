@@ -1,37 +1,35 @@
-type price
+type t
 
-type sign
+val mk_price : d:int -> c:int -> t
 
-val mkPrice : d:int -> c:int -> price
+val dollars : t -> int
 
-val dollars : price -> int
+val cents : t -> int
 
-val cents : price -> int
+val show_t : t -> string
 
-val show_price : price -> string
+val ( + ) : t -> t -> t
 
-val ( + ) : price -> price -> price
+val ( - ) : t -> t -> t
 
-val ( - ) : price -> price -> price
+val ascending : t -> t -> int
 
-val ascending : price -> price -> int
+val descending : t -> t -> int
 
-val descending : price -> price -> int
+val ( < ) : t -> t -> bool
 
-val ( < ) : price -> price -> bool
+val ( <= ) : t -> t -> bool
 
-val ( <= ) : price -> price -> bool
+val ( <> ) : t -> t -> bool
 
-val ( <> ) : price -> price -> bool
+val ( = ) : t -> t -> bool
 
-val ( = ) : price -> price -> bool
+val ( > ) : t -> t -> bool
 
-val ( > ) : price -> price -> bool
+val ( >= ) : t -> t -> bool
 
-val ( >= ) : price -> price -> bool
+val equal : t -> t -> bool
 
-val equal : price -> price -> bool
+val min : t -> t -> t
 
-val min : price -> price -> price
-
-val max : price -> price -> price
+val max : t -> t -> t

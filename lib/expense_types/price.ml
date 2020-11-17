@@ -1,4 +1,4 @@
-type price = { sign: sign; dollars: int; cents: int }
+type t = { sign: sign; dollars: int; cents: int }
 
 and sign = Pos | Neg
 
@@ -11,7 +11,7 @@ let same_sign a b =
   let both_neg = a_sign = Neg && b_sign = Neg in
   both_pos || both_neg
 
-let mkPrice ~d ~c =
+let mk_price ~d ~c =
   let c' = (abs c) mod 100 in
   if same_sign d c then
   let d' = (abs d) + (abs c) / 100 in
@@ -28,12 +28,12 @@ let show_sign = function
 | Pos -> "+"
 | Neg -> "-"
 
-let show_price {sign; dollars; cents} =
+let show_t {sign; dollars; cents} =
   if cents < 10 then show_sign sign ^ "$" ^ string_of_int dollars ^ ".0" ^ string_of_int cents
   else show_sign sign ^ "$" ^ string_of_int dollars ^ "." ^ string_of_int cents
 
-let ( + ) p1 p2 = mkPrice ~d:(p1.dollars + p2.dollars) ~c:(p1.cents + p2.cents)
+let ( + ) p1 p2 = mk_price ~d:(p1.dollars + p2.dollars) ~c:(p1.cents + p2.cents)
 
-let ( - ) p1 p2 = mkPrice ~d:(p1.dollars - p2.dollars) ~c:(p1.cents - p2.cents)
+let ( - ) p1 p2 = mk_price ~d:(p1.dollars - p2.dollars) ~c:(p1.cents - p2.cents)
 
 include Core.Poly
