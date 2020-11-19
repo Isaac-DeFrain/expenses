@@ -1,10 +1,7 @@
-module Date = Core_kernel.Date
 type date = Date.t
 
-module Price = Price
 type price = Price.t
 
-module Payment_method = Payment_method
 type pmt_meth = Payment_method.t
 
 type t = { date: date option; amount: price option; vendor: string; what: string; payment_method: pmt_meth }

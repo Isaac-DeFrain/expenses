@@ -1,6 +1,5 @@
 type t
 
-module Date : sig type t end
 type date = Date.t
 
 type price = Price.t
