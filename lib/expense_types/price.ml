@@ -28,7 +28,7 @@ let show_sign = function
 | Pos -> "+"
 | Neg -> "-"
 
-let show_t {sign; dollars; cents} =
+let to_string {sign; dollars; cents} =
   if cents < 10 then show_sign sign ^ "$" ^ string_of_int dollars ^ ".0" ^ string_of_int cents
   else show_sign sign ^ "$" ^ string_of_int dollars ^ "." ^ string_of_int cents
 

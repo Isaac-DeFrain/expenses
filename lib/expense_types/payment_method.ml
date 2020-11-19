@@ -5,6 +5,6 @@ let ba = BANK_ACCT
 
 let cc = CREDIT_CARD
 
-let show_t = function
+let to_string = function
 | BANK_ACCT -> "Bank acct"
 | CREDIT_CARD -> "Credit card"

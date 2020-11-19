@@ -9,12 +9,12 @@ type t = { date: date option; amount: price option; vendor: string; what: string
 let mk_expense ~date ~amount ~vendor ~what ~payment_method =
   { date; amount; vendor; what; payment_method }
 
-let rec show_t { date; amount; vendor; what; payment_method } =
+let rec to_string { date; amount; vendor; what; payment_method } =
   "What: " ^ what ^ "\n" ^
   "Date: " ^ show_date_opt date ^ "\n" ^
   "Amount: " ^ show_price_opt amount ^ "\n" ^
   "Vendor: " ^ vendor ^ "\n" ^
-  "Payment method: " ^ Payment_method.show_t payment_method
+  "Payment method: " ^ Payment_method.to_string payment_method
 
 and show_date_opt = function
 | None -> "N/A"
@@ -22,6 +22,6 @@ and show_date_opt = function
 
 and show_price_opt = function
 | None -> "N/A"
-| Some p -> Price.show_t p
+| Some p -> Price.to_string p
 
-let print_t exp = print_endline (show_t exp)
+let print_t exp = print_endline (to_string exp)
