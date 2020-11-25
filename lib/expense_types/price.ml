@@ -28,6 +28,11 @@ let show_sign = function
 | Pos -> "+"
 | Neg -> "-"
 
+let of_string s =
+  match String.split_on_char '.' s with
+  | d'::c'::_ -> mk_price ~d:(int_of_string d') ~c:(int_of_string c')
+  | _ -> assert false
+
 let to_string {sign; dollars; cents} =
   if cents < 10 then show_sign sign ^ "$" ^ string_of_int dollars ^ ".0" ^ string_of_int cents
   else show_sign sign ^ "$" ^ string_of_int dollars ^ "." ^ string_of_int cents
@@ -35,5 +40,9 @@ let to_string {sign; dollars; cents} =
 let ( + ) p1 p2 = mk_price ~d:(p1.dollars + p2.dollars) ~c:(p1.cents + p2.cents)
 
 let ( - ) p1 p2 = mk_price ~d:(p1.dollars - p2.dollars) ~c:(p1.cents - p2.cents)
+
+let zero = mk_price ~d:0 ~c:0
+
+let total = List.fold_left (+) zero
 
 include Core.Poly

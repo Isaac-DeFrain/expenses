@@ -3,7 +3,10 @@ type t
 val mk_price : d:int -> c:int -> t
 val dollars : t -> int
 val cents : t -> int
+val of_string : string -> t
 val to_string : t -> string
+val zero : t
+val total : t list -> t
 
 val ( + ) : t -> t -> t
 val ( - ) : t -> t -> t
