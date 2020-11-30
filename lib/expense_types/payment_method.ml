@@ -11,10 +11,8 @@ let of_string s =
   match split_on_char ':' s with
   | t'::rest ->
       if Core.List.is_empty rest then
-      if t' = "Bank acct" then ba
-      else cc
-      else
-      let s' = trim (concat "" rest) in
+      if t' = "Bank acct" then ba else cc
+      else let s' = trim (concat "" rest) in
       if t' = "Bank acct" then BANK_ACCT s'
       else CREDIT_CARD s'
   | _ -> assert false

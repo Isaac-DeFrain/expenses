@@ -26,6 +26,7 @@ let pmt_opt_of_assoc = function
 | "Payment method", p -> Some (Payment_method.of_string p)
 | _ -> assert false
 
+(** converts a 5-element string * string assoc list into an expense *)
 let expense_of_alist = function
 | [d; a; v; w; p] ->
     Expense.mk_expense ~date:(date_opt_of_assoc d) ~amount:(price_opt_of_assoc a)
@@ -36,20 +37,21 @@ let expense_of_alist = function
 let remove_empty_total =
   List.filter (
     let open Core.Poly in
-    fun l -> l <>  ["Date", ""; "Amount", ""; "Who", ""; "What", ""; "Payment method", ""]
-      && List.hd l <> ("Date", "Total"))
+    let empty =
+      ["Date", ""; "Amount", ""; "Who", ""; "What", ""; "Payment method", ""]
+    in
+    fun l -> l <>  empty && List.hd l <> ("Date", "Total"))
 
-let load_and_convert fname =
+let load_and_convert csv_fname =
   let open Csv in
   let header, data =
-    match load fname with
+    match load csv_fname with
     | h::tl -> h, tl
     | [] -> assert false
   in
   let associated = associate header data in
+  (* remove empty rows & total row *)
   let cleaned = remove_empty_total associated in
+  (* convert rows to expenses *)
   List.map expense_of_alist cleaned
   (* |> List.fold_left (fun m e -> ItemMap.add (Expense.name e) e m) ItemMap.empty *)
-
-(* remove empty rows *)
-(* convert rows to expense *)

@@ -10,6 +10,7 @@ val total : t list -> t
 
 val ( + ) : t -> t -> t
 val ( - ) : t -> t -> t
+val compare : t -> t -> int
 val ascending : t -> t -> int
 val descending : t -> t -> int
 val ( < ) : t -> t -> bool

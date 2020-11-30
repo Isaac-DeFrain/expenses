@@ -25,7 +25,7 @@ let dollars p = p.dollars
 let cents p = p.cents
 
 let show_sign = function
-| Pos -> "+"
+| Pos -> ""
 | Neg -> "-"
 
 let of_string s =
