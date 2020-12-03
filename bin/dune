@@ -1,4 +1,4 @@
 (executable
  (public_name expenses)
  (name main)
- (libraries expenses))
+ (libraries core expenses))
