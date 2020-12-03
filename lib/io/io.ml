@@ -42,6 +42,19 @@ let remove_empty_total =
     in
     fun l -> l <>  empty && List.hd l <> ("Date", "Total"))
 
+let csv_template =
+  let header = ["Date"; "Amount"; "Who"; "What"; "Payment method"] in
+  let blank = [""; ""; ""; ""; ""] in
+  let body = ["Total"; ""; ""; ""; ""] in
+  header :: blank :: [body]
+
+let append _csv _row = ()
+
+let csv_of_associated alist =
+  let header = List.hd (List.map (fun l -> List.map (fun (h, _) -> h) l) alist) in
+  let body = List.tl (List.map (fun l -> List.map (fun (_, x) -> x) l) alist) in
+  header :: body
+
 let load_and_convert csv_fname =
   let open Csv in
   let header, data =
@@ -50,8 +63,7 @@ let load_and_convert csv_fname =
     | [] -> assert false
   in
   let associated = associate header data in
-  (* remove empty rows & total row *)
   let cleaned = remove_empty_total associated in
-  (* convert rows to expenses *)
+  (* convert each row to an expense *)
   List.map expense_of_alist cleaned
   (* |> List.fold_left (fun m e -> ItemMap.add (Expense.name e) e m) ItemMap.empty *)
